@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  soppi-ecosystem:
+    build: .
+    container_name: soppi-ecosystem
+    restart: always
+    ports:
+      - "3001:3001" # App 1: Financement Participatif 50M FCFA
+      - "3002:3002" # App 2: Boutique E-Commerce B2C & Contrats B2B
+      - "3003:3003" # App 3: SaaS Coopérative & Stocks
+    volumes:
+      - ./packages/database:/app/packages/database
+      - ./shared-assets/images:/app/shared-assets/images
+

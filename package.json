@@ -1,0 +1,25 @@
+{
+  "name": "soppi-poivre-ecosystem",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Écosystème digital Plantation Soppi / Coopérative SCPPE (Poivre de la Mé - Côte d'Ivoire) : 1. Financement Participatif 50M FCFA, 2. E-Commerce B2C & Contrats B2B, 3. SaaS Coopérative & Standardisation",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "node start-ecosystem.js",
+    "dev:crowdfunding": "node apps/crowdfunding/server.js",
+    "dev:ecommerce": "node apps/ecommerce/server.js",
+    "dev:saas": "node apps/saas/server.js",
+    "seed": "node --experimental-sqlite packages/database/seed.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "main": "ecosystem.config.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
