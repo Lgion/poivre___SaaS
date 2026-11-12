@@ -1,17 +1,24 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
+const dbModulePath = fs.existsSync(path.join(__dirname, '../../packages/database'))
+  ? '../../packages/database'
+  : './database';
 const {
   getEcosystemSummary,
   addEcommerceOrder,
   addB2bContractLoi
-} = require('../../packages/database');
+} = require(dbModulePath);
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/images', express.static(path.join(__dirname, '../../shared-assets/images')));
+const imagesDir = fs.existsSync(path.join(__dirname, '../../shared-assets/images'))
+  ? path.join(__dirname, '../../shared-assets/images')
+  : path.join(__dirname, 'public/images');
+app.use('/images', express.static(imagesDir));
 
 function formatFcfa(amount) {
   return Number(amount || 0).toLocaleString('fr-FR') + ' FCFA';

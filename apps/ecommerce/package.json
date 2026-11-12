@@ -1,5 +1,5 @@
 {
-  "name": "@soppi/ecommerce",
+  "name": "soppi-ecommerce",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,6 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@soppi/database": "*",
     "express": "^4.21.1"
   }
 }
-

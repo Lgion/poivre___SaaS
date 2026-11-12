@@ -11,7 +11,7 @@
     "certificationGgn": "GLOBALG.A.P. GGN 4063651592948 — Certificat Ecocert 00120-VFXTV-0004",
     "pilotLocation": "Atelier Pilote Central — Garage aménagé de Mme Soppi (Abidjan) + 3 Pôles Régionaux",
     "farmersTargetRange": "25 à 40 agriculteurs partenaires (en expansion sous-régionale)",
-    "updatedAt": "2026-11-11T19:30:00Z"
+    "updatedAt": "2026-11-12T07:37:55.971Z"
   },
   "machines": [
     {
@@ -589,6 +589,20 @@
   ],
   "pledges": [
     {
+      "id": "PLEDGE-1794469075951",
+      "contributorName": "Testeur Unifie",
+      "contributorType": "Particulier",
+      "countryCity": "Abidjan",
+      "email": "test@soppi.ci",
+      "phone": " 22507000000",
+      "contributionMode": "Precommande",
+      "targetPole": "Conditionnement",
+      "amountFcfa": 50000,
+      "rewardLabel": "Pack Duo Curcuma",
+      "message": "",
+      "createdAt": "2026-11-12T07:37:55.951Z"
+    },
+    {
       "id": "PLEDGE-01",
       "contributorName": "Dr. Kouamé Jean-Marc (Diaspora France)",
       "contributorType": "Investisseur Diaspora",
@@ -685,6 +699,17 @@
     }
   ],
   "orders": [
+    {
+      "id": "ORD-1794469075971",
+      "orderCode": "CMD-2026-108",
+      "customerName": "Client Boutique",
+      "customerType": "B2C Particulier",
+      "phone": "",
+      "deliveryZone": "Abidjan",
+      "totalFcfa": 0,
+      "status": "Nouvelle commande — En préparation au Garage Central",
+      "createdAt": "2026-11-12T07:37:55.971Z"
+    },
     {
       "id": "ORD-01",
       "orderCode": "CMD-2026-104",

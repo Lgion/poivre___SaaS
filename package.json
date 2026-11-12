@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev": "node start-ecosystem.js",
+    "dev:unified": "node apps/unified/server.js",
     "dev:crowdfunding": "node apps/crowdfunding/server.js",
     "dev:ecommerce": "node apps/ecommerce/server.js",
     "dev:saas": "node apps/saas/server.js",
