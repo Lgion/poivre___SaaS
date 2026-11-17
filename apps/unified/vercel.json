@@ -8,6 +8,8 @@
         "includeFiles": [
           "database/**",
           "public/images/**",
+          "public/generated/**",
+          "public/docs/**",
           "modules/**"
         ]
       }

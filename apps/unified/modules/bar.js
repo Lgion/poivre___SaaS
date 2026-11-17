@@ -117,13 +117,13 @@ function renderUnifiedBar(activeTab = 'hub') {
       }
     }
   </style>
-  <aside class="soppi-unified-bar-wrapper" aria-label="Sélecteur d'application de l'écosystème Poivre Soppi">
+  <aside class="soppi-unified-bar-wrapper" aria-label="Sélecteur d'application de l'écosystème Coopérative SCPPE">
     <div class="soppi-unified-bar">
       <a href="/" class="soppi-unified-brand" title="Retour au Hub Global">
         <span class="soppi-unified-logo-icon">🌿</span>
         <div class="soppi-unified-brand-text">
           <span class="soppi-unified-brand-title">Le Comptoir du Poivre de Côte d'Ivoire</span>
-          <span class="soppi-unified-brand-sub">SCPPE • Mme Soppi • Écosystème Unifié</span>
+          <span class="soppi-unified-brand-sub">Coopérative SCPPE • Filière Poivre Certifiée • Écosystème Unifié</span>
         </div>
       </a>
       <nav class="soppi-unified-nav" aria-label="Navigation principale">
@@ -131,15 +131,15 @@ function renderUnifiedBar(activeTab = 'hub') {
           <span>🌐</span> Hub Écosystème
         </a>
         <a href="/invest" class="soppi-nav-btn ${activeTab === 'crowdfunding' ? 'active' : ''}">
-          <span>🚀</span> 1. Financement (50M)
+          <span>🚀</span> 1. Financement (60M)
           <span class="pill-badge">Pilote</span>
         </a>
         <a href="/boutique" class="soppi-nav-btn ${activeTab === 'ecommerce' ? 'active' : ''}">
-          <span>🛒</span> 2. Boutique & B2B
+          <span>🛒</span> 2. Boutique &amp; B2B
           <span class="pill-badge">Ventes</span>
         </a>
         <a href="/saas" class="soppi-nav-btn ${activeTab === 'saas' ? 'active' : ''}">
-          <span>🏭</span> 3. Portail SaaS
+          <span>🏭</span> 3. Portail Coopérative Agricole
           <span class="pill-badge">Coopérative</span>
         </a>
       </nav>

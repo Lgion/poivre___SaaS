@@ -18,13 +18,16 @@ function renderSaasPage(req, ecosystemData) {
   const data = ecosystemData;
   const { campaign, machines, producers, sites, lots, pledges, b2bContracts, orders, metrics } = data;
   const updatedFlag = req.query.updated || '';
+  const requestedLot = (req.query.lot || '').trim();
+  const selectedLotCode = requestedLot || lots[0]?.lotCode || '00120-VFXTV-0004';
+  const activeLot = lots.find((l) => l.lotCode === selectedLotCode) || lots[0];
 
   const html = `<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaaS Coopérative SCPPE &amp; Pilotage Exploitation — Plantation Soppi</title>
+  <title>Portail Coopérative Agricole SCPPE &amp; Pilotage Exploitation</title>
   <style>
     @property --fade-start {
       syntax: "<length>";
@@ -390,15 +393,15 @@ function renderSaasPage(req, ecosystemData) {
   ${renderUnifiedBar('saas')}
   <header class="saas-header">
     <div class="saas-brand">
-      <span class="saas-badge">ERP / SaaS COOPÉRATIVE</span>
+      <span class="saas-badge">PORTAIL COOPÉRATIVE AGRICOLE</span>
       <div>
-        <strong style="font-size: 1.1rem; display: block;">PORTAIL DE GESTION — PLANTATION SOPPI &amp; COOPÉRATIVE SCPPE</strong>
-        <span style="font-size: 0.82rem; color: #cfe0d6;">Standardisation CNRA/FIRCA • Lieux de Stockage &amp; Traitement • Pilotage des Devis Machines (50M FCFA)</span>
+        <strong style="font-size: 1.1rem; display: block;">PORTAIL COOPÉRATIVE AGRICOLE — COOPÉRATIVE SCPPE</strong>
+        <span style="font-size: 0.82rem; color: #cfe0d6;">Standardisation CNRA/FIRCA • Traçabilité QR &amp; Stockage • Devis Machines (60M FCFA)</span>
       </div>
     </div>
     <div class="app-switcher">
-      <a href="/invest">↗ Voir Site Financement 50M (Port 3001)</a>
-      <a href="/boutique">↗ Voir Boutique B2C/B2B (Port 3002)</a>
+      <a href="/invest">↗ Voir Site Financement 60M</a>
+      <a href="/boutique">↗ Voir Boutique &amp; Contrats B2B</a>
     </div>
   </header>
 
@@ -406,7 +409,7 @@ function renderSaasPage(req, ecosystemData) {
     ${
       updatedFlag
         ? `<div role="status" class="alert-banner">
-            ✅ Mise à jour enregistrée (${escapeHtml(updatedFlag)}) et synchronisée instantanément avec le Site de Financement (Port 3001) et la Boutique E-Commerce (Port 3002) !
+            ✅ Mise à jour enregistrée (${escapeHtml(updatedFlag)}) et synchronisée instantanément avec le Site de Financement et la Boutique E-Commerce !
           </div>`
         : ''
     }
@@ -420,12 +423,12 @@ function renderSaasPage(req, ecosystemData) {
       <div class="kpi-box">
         <span>Financement &amp; Précommandes</span>
         <strong>${formatFcfa(metrics.raisedTotalFcfa)} (${metrics.progressPercent}%)</strong>
-        <small>${pledges.length} engagements enregistrés sur Port 3001</small>
+        <small>${pledges.length} engagements enregistrés</small>
       </div>
       <div class="kpi-box">
         <span>Coopérative &amp; Standardisation</span>
-        <strong>32 Planteurs (${metrics.avgStandardizationScore}% CNRA)</strong>
-        <small>Cible : 25–40 partenaires • ${metrics.totalHectares} ha suivis</small>
+        <strong>37 Planteurs (${metrics.avgStandardizationScore}% CNRA)</strong>
+        <small>3 certifiés Global GAP • ${metrics.totalHectares} ha suivis</small>
       </div>
       <div class="kpi-box">
         <span>Stock Sec &amp; Contrats B2B</span>
@@ -435,15 +438,15 @@ function renderSaasPage(req, ecosystemData) {
     </div>
 
     <div class="tabs">
-      <div class="tablist scroller" focusgroup="tablist nomemory" aria-label="Modules du SaaS Coopérative Soppi">
+      <div class="tablist scroller" focusgroup="tablist nomemory" aria-label="Modules du Portail Coopérative Agricole SCPPE">
         <button type="button" id="tab-machines" aria-selected="true" focusgroupstart>
-          1. Devis Machines &amp; Paliers 50M (${machines.length})
+          1. Devis Machines &amp; Paliers 60M (${machines.length})
         </button>
         <button type="button" id="tab-producteurs" aria-selected="false">
-          2. Producteurs (25–40) &amp; Formation CNRA (${producers.length} pôles/groupes)
+          2. Producteurs (37 membres) &amp; Formation CNRA (${producers.length} pôles/groupes)
         </button>
         <button type="button" id="tab-lots" aria-selected="false">
-          3. Réception Lots Séchés (12–13%) &amp; QR (${lots.length})
+          3. Réception Lots (12–13%) &amp; Traçabilité QR (${lots.length})
         </button>
         <button type="button" id="tab-sites" aria-selected="false">
           4. Lieux de Stockage, Traitement &amp; Flux (${sites.length} sites)
@@ -457,14 +460,14 @@ function renderSaasPage(req, ecosystemData) {
             <div>
               <h2 style="margin: 0; color: var(--forest);">Configurateur des Coûts Machines &amp; Pôles d’Investissement</h2>
               <p style="margin: 0.25rem 0 0; color: var(--muted); font-size: 0.9rem;">
-                Vous n’avez pas encore les prix définitifs de certaines machines ? Modifiez ici à tout moment les montants estimatifs ou le statut des devis : le Site de Financement Participatif (Port 3001) se met à jour instantanément.
+                Modifiez ici à tout moment les montants estimatifs ou le statut des devis : le Site de Financement Participatif (60M FCFA) se met à jour instantanément.
               </p>
             </div>
           </div>
 
           <div tabindex="0" role="region" aria-labelledby="cap-saas-machines" class="table-wrapper">
             <table>
-              <caption id="cap-saas-machines">Postes d’investissement (Atelier Garage Mme Soppi, BFR Collecte &amp; Zone Brouillon/Amont)</caption>
+              <caption id="cap-saas-machines">Postes d’investissement (Atelier Pilote d’Abidjan, BFR Collecte &amp; Pôles Régionaux)</caption>
               <thead>
                 <tr>
                   <th scope="col">Machine / Poste</th>
@@ -512,7 +515,7 @@ function renderSaasPage(req, ecosystemData) {
             <div class="field">
               <label for="new-m-pole">Pôle d’affectation</label>
               <select id="new-m-pole" name="pole">
-                <option value="Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)">Pôle 1 — Priorité Atelier Garage (Mouture, Emballage, Calibrage)</option>
+                <option value="Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)">Pôle 1 — Priorité Atelier Pilote (Mouture, Emballage, Calibrage)</option>
                 <option value="Pôle 2 — Fonds de Roulement (BFR) Collecte Coopérative">Pôle 2 — BFR Collecte Coopérative</option>
                 <option value="Pôle 3 — Équipements Amont & Pôles Partenaires (Zone Brouillon / Étape 2)">Pôle 3 — Zone Brouillon / Étape 2 (Séchage, Égrainage, Atomiseurs)</option>
               </select>
@@ -544,7 +547,7 @@ function renderSaasPage(req, ecosystemData) {
       <div role="tabpanel" aria-labelledby="tab-producteurs" hidden="until-found">
         <div class="tabpanel-inner">
           <h2 style="margin-block-start: 0; color: var(--forest);">
-            Encadrement, Formation &amp; Standardisation des 25–40 Producteurs Partenaires (Protocole CNRA / FIRCA)
+            Encadrement, Formation &amp; Standardisation des 37 Producteurs Partenaires (Protocole CNRA / FIRCA)
           </h2>
           <p style="color: var(--muted); font-size: 0.9rem;">
             Suivi de l’itinéraire technique issu du guide CNRA/FIRCA : boutures 2–3 nœuds sous ombrière, tuteurs vivants <em>Glyricidia</em> (2m×2m), récolte au sécateur dès le 1er grain jaune, ébouillantage 3 min / rouissage 10j, et séchage sur grillage plastique à 12–13% d’humidité.
@@ -585,7 +588,7 @@ function renderSaasPage(req, ecosystemData) {
                       </td>
                       <td>
                         <span class="chip ${p.standardizationScore >= 90 ? 'ok' : ''}">Score : ${p.standardizationScore}%</span><br>
-                        <small>${p.globalGapCertified ? '🏅 Certifié GLOBALG.A.P.' : escapeHtml(p.trainingStatus)}</small>
+                        <small>${p.globalGapCertified ? '🏅 Certifié Global GAP' : escapeHtml(p.trainingStatus)}</small>
                       </td>
                       <td><strong style="color: var(--forest);">${p.driedStockAvailableKg} kg secs</strong></td>
                     </tr>`;
@@ -643,15 +646,58 @@ function renderSaasPage(req, ecosystemData) {
         </div>
       </div>
 
-      <!-- ONGLET 3 : LOTS & CONTRÔLE QUALITÉ -->
+      <!-- ONGLET 3 : LOTS, CONTRÔLE QUALITÉ & VÉRIFICATEUR TRAÇABILITÉ QR -->
       <div role="tabpanel" aria-labelledby="tab-lots" hidden="until-found">
         <div class="tabpanel-inner">
           <h2 style="margin-block-start: 0; color: var(--forest);">
             Réception des Lots Séchés, Contrôle d’Humidité (12–13%) &amp; Traçabilité QR
           </h2>
           <p style="color: var(--muted); font-size: 0.9rem;">
-            Chaque lot réceptionné au Garage Central d’Abidjan est testé avant mise en stock hermétique. Tout lot enregistré ici génère un code traçable sur la Boutique E-Commerce (Port 3002).
+            Chaque lot réceptionné à l’Atelier Pilote d’Abidjan est testé avant mise en stock hermétique et vérifiable publiquement par code QR.
           </p>
+
+          <!-- Vérificateur Public de Traçabilité (QR Code Lot) déplacé ici dans le Portail Coopérative Agricole -->
+          <div style="background: var(--surface-alt); border: 1.5px solid var(--forest); border-radius: 14px; padding: 1.25rem; margin-block-end: 1.5rem;" id="verificateur-qr">
+            <h3 style="margin-block-start: 0; color: var(--forest);">🔍 Vérificateur Public de Traçabilité (QR Code Lot)</h3>
+            <p style="font-size: 0.88rem; color: var(--muted); margin-block: 0.25rem 0.9rem;">
+              Chaque pot, stick ou coffret porte un numéro de lot lié au certificat <strong>Global GAP</strong> et au contrôle d’humidité (12–13%) réalisé avant emballage.
+            </p>
+            <form action="/saas#lots" method="GET" style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-block-end: 1rem;">
+              <div style="flex: 1; min-width: 240px;">
+                <label for="lot-select" class="visually-hidden">Choisir un numéro de lot</label>
+                <select id="lot-select" name="lot">
+                  ${lots
+                    .map(
+                      (l) =>
+                        `<option value="${escapeHtml(l.lotCode)}" ${l.lotCode === activeLot?.lotCode ? 'selected' : ''}>Lot ${escapeHtml(l.lotCode)} — ${escapeHtml(l.pepperType)}</option>`
+                    )
+                    .join('')}
+                </select>
+              </div>
+              <button type="submit" class="btn-secondary">Vérifier le Lot</button>
+            </form>
+            ${
+              activeLot
+                ? `<div style="background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-block-end: 0.5rem;">
+                      <strong style="color: var(--forest); font-size: 1.02rem;">Lot Certifié : ${escapeHtml(activeLot.lotCode)}</strong>
+                      <span class="chip ok">${escapeHtml(activeLot.qualityGrade)}</span>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.87rem; display: grid; gap: 0.35rem;">
+                      <li><strong>Produit :</strong> ${escapeHtml(activeLot.pepperType)}</li>
+                      <li><strong>Variété CNRA :</strong> ${escapeHtml(activeLot.variety)}</li>
+                      <li><strong>Origine &amp; Producteur :</strong> ${escapeHtml(activeLot.producerName)} (${escapeHtml(activeLot.originLocality)})</li>
+                      <li><strong>Date de récolte :</strong> ${escapeHtml(activeLot.harvestDate)} • <strong>Volume :</strong> ${activeLot.weightKg} kg secs</li>
+                      <li><strong>Taux d’humidité mesuré :</strong> <span style="color: var(--success); font-weight: 700;">${activeLot.moisturePercent}% (Conforme norme 12–13% — grain crissant)</span></li>
+                      <li><strong>Calibrage :</strong> ${escapeHtml(activeLot.caliberMm)}</li>
+                      <li><strong>Itinéraire Post-Récolte :</strong> ${escapeHtml(activeLot.processingMethod)}</li>
+                      <li><strong>Conditionnement :</strong> ${escapeHtml(activeLot.packagingState)}</li>
+                      <li><strong>Certification :</strong> ${escapeHtml(activeLot.certifiedGgn)}</li>
+                    </ul>
+                  </div>`
+                : ''
+            }
+          </div>
 
           <div tabindex="0" role="region" aria-labelledby="cap-lots" class="table-wrapper">
             <table>
@@ -731,10 +777,10 @@ function renderSaasPage(req, ecosystemData) {
       <div role="tabpanel" aria-labelledby="tab-sites" hidden="until-found">
         <div class="tabpanel-inner">
           <h2 style="margin-block-start: 0; color: var(--forest);">
-            Maillage des Lieux de Stockage et de Traitement (Hub Garage Central + Pôles Partenaires)
+            Maillage des Lieux de Stockage et de Traitement (Atelier Pilote Central + Pôles Partenaires)
           </h2>
           <p style="color: var(--muted); font-size: 0.9rem;">
-            Organisation agile : pré-traitement (égrainage, lavage, ébouillantage 3 min, rouissage 10j, séchage) sur les pôles partenaires en région, et finition haute valeur (calibrage, mouture poivre/curcuma, sticks, zips, bouteilles) dans le garage aménagé de Mme Soppi à Abidjan.
+            Organisation agile : pré-traitement (égrainage, lavage, ébouillantage 3 min, rouissage 10j, séchage) sur les pôles partenaires en région, et finition haute valeur (calibrage, mouture poivre/curcuma, sticks, zips, bouteilles) dans l’atelier pilote aménagé à Abidjan.
           </p>
 
           <div class="site-grid">
@@ -775,7 +821,7 @@ function renderSaasPage(req, ecosystemData) {
   <dialog id="edit-machine-dialog" closedby="any" aria-labelledby="edit-machine-title">
     <h2 id="edit-machine-title" style="margin-block-start: 0; color: var(--forest);">Modifier le Prix / Devis de la Machine</h2>
     <p style="font-size: 0.88rem; color: var(--muted);">
-      Toute modification enregistrée ici met à jour instantanément la vitrine d’Appel à Financement Participatif (Port 3001).
+      Toute modification enregistrée ici met à jour instantanément la vitrine d’Appel à Financement Participatif (60M FCFA).
     </p>
     <form action="/api/machine/update" method="POST">
       <input type="hidden" id="edit-m-id" name="id">
@@ -799,7 +845,7 @@ function renderSaasPage(req, ecosystemData) {
       <div class="field" style="margin-block-end: 1rem;">
         <label for="edit-m-prio">Priorité de déploiement</label>
         <select id="edit-m-prio" name="priority">
-          <option value="Priorité 1 — Démarrage immédiat">Priorité 1 — Démarrage immédiat (Garage Pilote)</option>
+          <option value="Priorité 1 — Démarrage immédiat">Priorité 1 — Démarrage immédiat (Atelier Pilote)</option>
           <option value="Étape 2 — Pôles Partenaires & Amont">Étape 2 — Pôles Partenaires &amp; Amont (Zone Brouillon)</option>
         </select>
       </div>
@@ -889,9 +935,9 @@ function renderSaasPage(req, ecosystemData) {
         });
       });
 
-      // Activate tab matching URL hash if present
+      // Activate tab matching URL hash or ?lot= query if present
       if (window.location.hash === '#producteurs') selectTab(document.getElementById('tab-producteurs'));
-      if (window.location.hash === '#lots') selectTab(document.getElementById('tab-lots'));
+      if (window.location.hash === '#lots' || new URLSearchParams(window.location.search).has('lot')) selectTab(document.getElementById('tab-lots'));
       if (window.location.hash === '#sites') selectTab(document.getElementById('tab-sites'));
     });
   </script>

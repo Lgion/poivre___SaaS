@@ -9,23 +9,23 @@ const SCHEMA_SQL_PATH = path.join(__dirname, 'schema.sql');
 
 const INITIAL_DATA = {
   campaign: {
-    id: 'CAMP-SOPPI-50M',
-    title: "Industrialisation Agile du Poivre de Côte d'Ivoire — Phase Pilote & Coopérative",
-    targetAmountFcfa: 50000000,
+    id: 'CAMP-SOPPI-60M',
+    title: 'Industrialisation Agile du Poivre de Côte d’Ivoire — Phase Pilote & Coopérative',
+    targetAmountFcfa: 60000000,
     initialCommittedFcfa: 14850000,
     masterPlanCapexFcfa: 2352000000,
-    cooperativeName: "Société Coopérative des Producteurs de Poivre d'Éburnie (SCPPE)",
-    presidentName: 'Mme ATSE Chiepo Solange épouse Diabagaté',
-    promoterEntity: 'LE GROUP SOPPI CONSULTING / PLANTATION SOPPI (Poivre de la Mé)',
-    certificationGgn: 'GLOBALG.A.P. GGN 4063651592948 — Certificat Ecocert 00120-VFXTV-0004',
-    pilotLocation: 'Atelier Pilote Central — Garage aménagé de Mme Soppi (Abidjan) + 3 Pôles Régionaux',
-    farmersTargetRange: '25 à 40 agriculteurs partenaires (en expansion sous-régionale)',
+    cooperativeName: "Présidente de Société Coopérative des Producteurs de Poivre d'Éburnie (SCPPE)",
+    presidentName: 'Mme ATSE Chiepo Solange',
+    promoterEntity: 'Coopérative SCPPE / Le Comptoir du Poivre de Côte d’Ivoire',
+    certificationGgn: 'Global GAP GGN 4063651592948 — Certificat Ecocert 00120-VFXTV-0004',
+    pilotLocation: 'Atelier Pilote Central (Abidjan) + 3 Pôles Régionaux Certifiés',
+    farmersTargetRange: '37 membres producteurs encadrés (SCPPE)',
     updatedAt: '2026-11-11T19:30:00Z'
   },
   machines: [
     {
       id: 'MACH-01',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       name: 'Moulin / Broyeur Inox Pro (Poivre & Curcuma)',
       category: 'Mouture & Transformation',
       description:
@@ -38,7 +38,7 @@ const INITIAL_DATA = {
     },
     {
       id: 'MACH-02',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       name: 'Ensacheuse Automatique de Sticks Hermétiques (Format type Nescafé)',
       category: 'Emballage Hermétique',
       description:
@@ -51,7 +51,7 @@ const INITIAL_DATA = {
     },
     {
       id: 'MACH-03',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       name: 'Scelleuse Continue Sachets Zips Double-Hermétiques',
       category: 'Emballage Hermétique',
       description:
@@ -64,7 +64,7 @@ const INITIAL_DATA = {
     },
     {
       id: 'MACH-04',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       name: 'Doseuse-Remplisseuse & Capsuleuse Bouteilles (Plastique & Verre Luxe)',
       category: 'Emballage Hermétique',
       description:
@@ -77,7 +77,7 @@ const INITIAL_DATA = {
     },
     {
       id: 'MACH-05',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       name: 'Tamis Vibratoire de Calibrage Multi-Étages (Inox)',
       category: 'Calibrage & Tri',
       description:
@@ -90,21 +90,21 @@ const INITIAL_DATA = {
     },
     {
       id: 'MACH-06',
-      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
-      name: 'Aménagement Normé du Garage Pilote & Équipe Opérationnelle',
+      pole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
+      name: 'Aménagement Normé de l’Atelier Pilote & Équipe Opérationnelle',
       category: 'Aménagement & Stockage Sec',
       description:
-        'Aménagement de l’atelier dans le garage de Mme Soppi : étanchéité anti-rongeurs (toiture scellée, moustiquaires, portes ajustées), déshumidification, tables inox, employés permanents & renforts à la demande.',
+        'Aménagement de l’atelier pilote d’Abidjan : étanchéité anti-rongeurs (toiture scellée, moustiquaires, portes ajustées), déshumidification, tables inox, employés permanents & renforts à la demande.',
       estimatedCostFcfa: 5800000,
       priceStatus: 'Estimatif (Chiffrage travaux interne)',
       priority: 'Priorité 1 — Démarrage immédiat',
-      supplierNote: 'Zéro coût foncier au démarrage : optimisation immédiate des locaux existants.',
+      supplierNote: 'Zéro coût foncier au démarrage : optimisation immédiate des locaux pilotes.',
       fundedAmountFcfa: 1800000
     },
     {
       id: 'MACH-07',
       pole: 'Pôle 2 — Fonds de Roulement (BFR) Collecte Coopérative',
-      name: 'Fonds d’Achat Comptant de Poivre Séché Standardisé & Curcuma (25-40 Planteurs)',
+      name: 'Fonds d’Achat Comptant de Poivre Séché Standardisé & Curcuma (37 Planteurs)',
       category: 'Collecte & BFR Coopérative',
       description:
         'Trésorerie de roulement pour racheter immédiatement les lots séchés (12-13% humidité) aux partenaires formés de la SCPPE avec prime à la qualité.',
@@ -150,7 +150,7 @@ const INITIAL_DATA = {
       estimatedCostFcfa: 3500000,
       priceStatus: 'Estimatif (Étape 2 — À affiner)',
       priority: 'Étape 2 — Pôles Partenaires & Amont',
-      supplierNote: 'Capitalise sur les 6 ans de tests mécaniques de Mme Soppi.',
+      supplierNote: 'Capitalise sur les 6 ans de tests mécaniques de la coopérative.',
       fundedAmountFcfa: 0
     }
   ],
@@ -205,7 +205,7 @@ const INITIAL_DATA = {
       stockUnits: 68,
       imageUrl: '/images/coffret-3-poivres.jpg',
       description:
-        'Le joyau du terroir ivoirien certifié GLOBALG.A.P. Incontournable pour composer les Paniers de Ramadan, Paniers de Pâques, cadeaux diplomatiques et coffrets de fin d’année des entreprises.',
+        'Le joyau du terroir ivoirien certifié Global GAP Incontournable pour composer les Paniers de Ramadan, Paniers de Pâques, cadeaux diplomatiques et coffrets de fin d’année des entreprises.',
       healthOrUsageBadge: 'Spécial Paniers Ramadan, Pâques & Cadeaux Corporate',
       traceabilityLotCode: '00120-VFXTV-0004'
     },
@@ -278,7 +278,7 @@ const INITIAL_DATA = {
       imageUrl: '/images/sacs-pro-1kg.jpg',
       description:
         'Conditionnement grand compte pour hôtels, restaurants, charcuteries industrielles, distributeurs CEDEAO (Sénégal, Mali, Burkina, Togo) et acheteurs internationaux exigeant du grain calibré.',
-      healthOrUsageBadge: 'Certifié GLOBALG.A.P. — Calibré au Tamis Inox',
+      healthOrUsageBadge: 'Certifié Global GAP — Calibré au Tamis Inox',
       traceabilityLotCode: '00120-VFXTV-0004'
     }
   ],
@@ -286,8 +286,8 @@ const INITIAL_DATA = {
     {
       id: 'PROD-AGRI-01',
       code: 'SCPPE-001',
-      fullName: 'Mme ATSE Chiepo Solange épse Diabagaté',
-      roleTitle: 'Présidente Fondatrice SCPPE — Plantation SOPPI',
+      fullName: 'Mme ATSE Chiepo Solange',
+      roleTitle: 'Présidente de Société Coopérative des Producteurs de Poivre d’Éburnie (SCPPE) — Plantation SOPPI',
       locality: 'Brofodoumé - Anyama',
       regionPole: 'Pôle Grands Ponts / Abidjan Nord',
       hectares: 10.0,
@@ -318,7 +318,7 @@ const INITIAL_DATA = {
       variety: 'Muntok (14g/100gr frais, 5.2g sec)',
       plantingYear: 2020,
       globalGapCertified: true,
-      trainingStatus: 'Certifié GlobalG.A.P. & Standardisé',
+      trainingStatus: 'Certifié Global GAP & Standardisé',
       standardizationScore: 95,
       driedStockAvailableKg: 215,
       phone: '+225 05 67 23 03 11',
@@ -342,7 +342,7 @@ const INITIAL_DATA = {
       variety: 'Lampong & Muntok',
       plantingYear: 2021,
       globalGapCertified: true,
-      trainingStatus: 'Certifié GlobalG.A.P. & Standardisé',
+      trainingStatus: 'Certifié Global GAP & Standardisé',
       standardizationScore: 94,
       driedStockAvailableKg: 260,
       phone: '+225 07 48 12 90 34',
@@ -431,11 +431,11 @@ const INITIAL_DATA = {
   sites: [
     {
       id: 'SITE-HUB-ABJ',
-      code: 'HUB-ABJ-GARAGE',
-      name: 'Atelier Pilote Central & Entrepôt Sec (Garage aménagé Mme Soppi)',
+      code: 'HUB-ABJ-PILOTE',
+      name: 'Atelier Pilote Central & Entrepôt Sec (Abidjan)',
       siteType: 'Hub Central — Calibrage, Mouture, Emballage Hermétique & Stockage Finis',
       locality: 'Abidjan (District d’Abidjan)',
-      managerName: 'Mme ATSE Chiepo Solange & Équipe Centrale',
+      managerName: 'Direction Technique SCPPE & Équipe Centrale',
       capacityKg: 3500,
       currentStockKg: 980,
       permanentStaff: 4,
@@ -456,7 +456,7 @@ const INITIAL_DATA = {
         'Mise en sticks, sachets zips scellés, pots et coffrets',
         'Stockage en salle sèche scellée anti-rongeurs (norme CNRA)'
       ],
-      status: 'Opérationnel — En cours de mécanisation (Cible 50M FCFA)'
+      status: 'Opérationnel — En cours de mécanisation (Cible 60M FCFA)'
     },
     {
       id: 'SITE-POLE-BRO',
@@ -483,7 +483,7 @@ const INITIAL_DATA = {
         'Ébouillantage 3 min (poivre noir) et trempage 10j (poivre blanc)',
         'Séchage jusqu’à 12-13% d’humidité et vannage'
       ],
-      status: 'Certifié GLOBALG.A.P. (GGN 4063651592948)'
+      status: 'Certifié Global GAP (GGN 4063651592948)'
     },
     {
       id: 'SITE-POLE-AZA',
@@ -506,9 +506,9 @@ const INITIAL_DATA = {
       operations: [
         'Collecte groupée des planteurs d’Azaguié et Agboville',
         'Contrôle du séchage (grain qui crisse sous la main à 12-13%)',
-        'Vannage et triage des résidus avant expédition au Garage Central'
+        'Vannage et triage des résidus avant expédition à l’Atelier Pilote d’Abidjan'
       ],
-      status: 'Certifié GLOBALG.A.P. — Besoin séchoir thermique Étape 2'
+      status: 'Certifié Global GAP — Besoin séchoir thermique Étape 2'
     },
     {
       id: 'SITE-POLE-YAK',
@@ -532,7 +532,7 @@ const INITIAL_DATA = {
         'Encadrement des nouveaux planteurs partenaires de la Mé',
         'Pré-stockage sec avant transfert vers Abidjan'
       ],
-      status: 'Certifié GLOBALG.A.P. — Expansion partenaires active'
+      status: 'Certifié Global GAP — Expansion partenaires active'
     }
   ],
   lots: [
@@ -550,7 +550,7 @@ const INITIAL_DATA = {
       moisturePercent: 12.2,
       caliberMm: '4,8 mm (Calibré Supérieur Export)',
       processingMethod: 'Récolte au 1er grain jaune au sécateur, égrainage, lavage double, ébouillantage 3 min, séchage 5 jours sur grillage plastique perforé.',
-      qualityGrade: 'Grade A+ Certifié GLOBALG.A.P.',
+      qualityGrade: 'Grade A+ Certifié Global GAP',
       packagingState: 'Conditionné Double-Hermétique (Coffrets, Pots & Sticks)',
       purchasePricePerKgFcfa: 4500,
       certifiedGgn: 'GGN 4063651592948 / Certificat Ecocert 00120-VFXTV-0004'
@@ -569,8 +569,8 @@ const INITIAL_DATA = {
       moisturePercent: 12.5,
       caliberMm: '4,5 mm (Standardisé Soppi)',
       processingMethod: 'Ébouillantage 3 min en fût aluminium, séchage solaire contrôlé à 12,5% d’humidité, vannage et triage.',
-      qualityGrade: 'Grade A+ Certifié GLOBALG.A.P.',
-      packagingState: 'En stock sec au Garage Central (Prêt pour Mouture & Zips)',
+      qualityGrade: 'Grade A+ Certifié Global GAP',
+      packagingState: 'En stock sec à l’Atelier Pilote d’Abidjan (Prêt pour Mouture & Zips)',
       purchasePricePerKgFcfa: 4500,
       certifiedGgn: 'GGN 4063651592948'
     },
@@ -622,10 +622,10 @@ const INITIAL_DATA = {
       email: 'jm.kouame@diaspora-invest.fr',
       phone: '+33 6 18 45 92 10',
       contributionMode: 'Investissement Productif (Co-financement Machine)',
-      targetPole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      targetPole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       amountFcfa: 2500000,
       rewardLabel: 'Partenaire Industriel Pilote + Convention de partage + 10 Coffrets Prestige',
-      message: 'Fier de soutenir la transformation locale d’un poivre ivoirien déjà certifié GlobalG.A.P. !',
+      message: 'Fier de soutenir la transformation locale d’un poivre ivoirien déjà certifié Global GAP !',
       createdAt: '2026-11-02T14:20:00Z'
     },
     {
@@ -636,7 +636,7 @@ const INITIAL_DATA = {
       email: 'achats@paletuviers-ci.com',
       phone: '+225 07 09 44 12 00',
       contributionMode: 'Préachat Professionnel de Stock (B2B)',
-      targetPole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      targetPole: 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
       amountFcfa: 850000,
       rewardLabel: 'Précommande annuelle de 15 cartons de Sticks Hermétiques + 30 Coffrets Clients VIP',
       message: 'Nous voulons les sticks Poivre de la Mé sur toutes nos tables dès le lancement.',
@@ -653,7 +653,7 @@ const INITIAL_DATA = {
       targetPole: 'Pôle 2 — Fonds de Roulement (BFR) Collecte Coopérative',
       amountFcfa: 150000,
       rewardLabel: 'Pack 10 Coffrets Prestige 3 Poivres (Spécial Paniers Ramadan & Fêtes)',
-      message: 'Les coffrets sont magnifiques pour offrir pendant le Ramadan, bravo à Mme Soppi.',
+      message: 'Les coffrets sont magnifiques pour offrir pendant le Ramadan, bravo à toute l’équipe de la coopérative.',
       createdAt: '2026-11-09T17:40:00Z'
     }
   ],
@@ -684,7 +684,7 @@ const INITIAL_DATA = {
       countryCity: 'Dakar, Sénégal / Bamako, Mali',
       phone: '+221 77 412 89 00',
       email: 'direction@epices-sahel.sn',
-      productSummary: 'Sacs Pro 1kg & 25kg Grains Calibrés Certifiés GlobalG.A.P. + Sachets Zips 200g',
+      productSummary: 'Sacs Pro 1kg & 25kg Grains Calibrés Certifiés Global GAP + Sachets Zips 200g',
       frequency: 'Trimestrielle (Contrat Sous-Régional)',
       monthlyVolumeKg: 120,
       annualEstimatedValueFcfa: 17280000,
@@ -732,7 +732,7 @@ const INITIAL_DATA = {
       deliveryZone: 'Abidjan - Deux Plateaux',
       itemsSummary: '2 × Boîte 50 Sticks Poivre Pur (Vitalité) + 2 × Sachet Zip Famille 200g',
       totalFcfa: 13400,
-      status: 'En préparation (Garage Central)',
+      status: 'En préparation (Atelier Pilote Central)',
       createdAt: '2026-11-11T09:15:00Z'
     }
   ]
@@ -773,7 +773,7 @@ function getEcosystemSummary() {
   const totalEstimatedMachinesFcfa = db.machines.reduce((sum, m) => sum + Number(m.estimatedCostFcfa || 0), 0);
   const pledgesTotalFcfa = db.pledges.reduce((sum, p) => sum + Number(p.amountFcfa || 0), 0);
   const raisedTotalFcfa = Number(db.campaign.initialCommittedFcfa || 0) + pledgesTotalFcfa;
-  const progressPercent = Math.min(100, Math.round((raisedTotalFcfa / (db.campaign.targetAmountFcfa || 50000000)) * 1000) / 10);
+  const progressPercent = Math.min(100, Math.round((raisedTotalFcfa / (db.campaign.targetAmountFcfa || 60000000)) * 1000) / 10);
 
   const totalDriedStockKg = db.producers.reduce((sum, p) => sum + Number(p.driedStockAvailableKg || 0), 0);
   const totalHectares = Math.round(db.producers.reduce((sum, p) => sum + Number(p.hectares || 0), 0) * 10) / 10;
@@ -784,6 +784,8 @@ function getEcosystemSummary() {
     (sum, c) => sum + Number(c.annualEstimatedValueFcfa || 0),
     0
   );
+  const ecommerceSalesFcfa = (db.orders || []).reduce((sum, o) => sum + Number(o.totalFcfa || 0), 0);
+  const certifiedProducersCount = db.producers.filter((p) => p.globalGapCertified).length;
 
   return {
     ...db,
@@ -796,8 +798,10 @@ function getEcosystemSummary() {
       totalHectares,
       avgStandardizationScore,
       totalB2bAnnualCommitmentsFcfa,
-      activeFarmersCount: 32,
-      targetFarmersRange: '25 - 40'
+      ecommerceSalesFcfa,
+      certifiedProducersCount,
+      activeFarmersCount: 37,
+      targetFarmersRange: '37 producteurs encadrés'
     }
   };
 }
@@ -827,7 +831,7 @@ function addMachineItem(newMachine) {
   const id = `MACH-${String(db.machines.length + 1).padStart(2, '0')}`;
   const item = {
     id,
-    pole: newMachine.pole || 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+    pole: newMachine.pole || 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
     name: newMachine.name,
     category: newMachine.category || 'Équipement',
     description: newMachine.description || '',
@@ -871,7 +875,7 @@ function addCrowdfundingPledge(pledgeInput) {
     phone: pledgeInput.phone || '',
     contributionMode: pledgeInput.contributionMode || 'Précommande Solidaire (Coffrets & Sticks)',
     targetPole:
-      pledgeInput.targetPole || 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Garage)',
+      pledgeInput.targetPole || 'Pôle 1 — Priorité Conditionnement, Mouture & Calibrage (Atelier Pilote)',
     amountFcfa: Number(pledgeInput.amountFcfa || 0),
     rewardLabel: pledgeInput.rewardLabel || 'Contrepartie Poivre de la Mé',
     message: pledgeInput.message || '',
@@ -893,7 +897,7 @@ function addEcommerceOrder(orderInput) {
     deliveryZone: orderInput.deliveryZone || 'Abidjan',
     itemsSummary: orderInput.itemsSummary,
     totalFcfa: Number(orderInput.totalFcfa || 0),
-    status: 'Nouvelle commande — En préparation au Garage Central',
+    status: 'Nouvelle commande — En préparation à l’Atelier Pilote d’Abidjan',
     createdAt: new Date().toISOString()
   };
   db.orders.unshift(item);
@@ -948,7 +952,7 @@ function addQualityLot(lotInput) {
     qualityGrade: isMoistureStandard
       ? 'Grade A+ Standardisé Soppi (Humidité conforme 12-13%)'
       : 'En reprise de séchage (Humidité > 13%)',
-    packagingState: lotInput.packagingState || 'Stocké en sac double-hermétique au Garage Central',
+    packagingState: lotInput.packagingState || 'Stocké en sac double-hermétique à l’Atelier Pilote d’Abidjan',
     purchasePricePerKgFcfa: Number(lotInput.purchasePricePerKgFcfa || (isMoistureStandard ? 4500 : 3800)),
     certifiedGgn: 'Protocole CNRA / SCPPE — GGN 4063651592948'
   };

@@ -23,6 +23,7 @@ const { renderHub } = require('./modules/hub');
 const { renderCrowdfundingPage } = require('./modules/crowdfunding');
 const { renderEcommercePage } = require('./modules/ecommerce');
 const { renderSaasPage } = require('./modules/saas');
+const { renderCertifiedListPage, renderPlanterDetailPage } = require('./modules/planter-detail');
 
 const app = express();
 const DEFAULT_PORT = process.env.PORT ? Number(process.env.PORT) : 3004;
@@ -36,16 +37,47 @@ const imagesDir = fs.existsSync(path.join(__dirname, 'public/images'))
   : path.join(__dirname, '../../shared-assets/images');
 app.use('/images', express.static(imagesDir));
 
+const docsDir = path.join(__dirname, 'public/docs');
+if (fs.existsSync(docsDir)) {
+  app.use('/docs', express.static(docsDir));
+}
+
+const generatedDir = path.join(__dirname, 'public/generated');
+if (fs.existsSync(generatedDir)) {
+  app.use('/generated', express.static(generatedDir));
+}
+
+try {
+  const leafletDistDir = path.join(path.dirname(require.resolve('leaflet/package.json')), 'dist');
+  app.use('/vendor/leaflet', express.static(leafletDistDir));
+} catch (_err) {
+  // Leaflet optional fallback if missing
+}
+
 // ==========================================
-// 1. HUB CENTRAL ÉCOSYSTÈME
+// 1. HUB CENTRAL ÉCOSYSTÈME & DOMAINES CERTIFIÉS
 // ==========================================
 app.get('/', (_req, res) => {
   const summary = getEcosystemSummary();
   res.send(renderHub(summary));
 });
 
+app.get('/planteurs', (_req, res) => {
+  const summary = getEcosystemSummary();
+  res.send(renderCertifiedListPage(summary));
+});
+
+app.get('/planteurs/:id', (req, res) => {
+  const summary = getEcosystemSummary();
+  const pageHtml = renderPlanterDetailPage(summary, req.params.id);
+  if (!pageHtml) {
+    return res.status(404).send(renderCertifiedListPage(summary));
+  }
+  return res.send(pageHtml);
+});
+
 // ==========================================
-// 2. APPLICATION 1 : FINANCEMENT & PRÉCOMMANDES (50M FCFA)
+// 2. APPLICATION 1 : FINANCEMENT & PRÉCOMMANDES (60M FCFA)
 // ==========================================
 app.get('/invest', (req, res) => {
   const summary = getEcosystemSummary();
@@ -65,6 +97,7 @@ app.post('/api/pledge', (req, res) => {
       targetPole,
       amountFcfa,
       rewardLabel,
+      message,
       notes
     } = req.body;
 
@@ -78,7 +111,7 @@ app.post('/api/pledge', (req, res) => {
       targetPole,
       amountFcfa,
       rewardLabel,
-      notes
+      message: message || notes
     });
 
     const summary = getEcosystemSummary();
@@ -105,10 +138,15 @@ app.post('/api/order', (req, res) => {
   try {
     const {
       customerName,
+      customerType,
       customerEmail,
+      phone,
       customerPhone,
+      deliveryZone,
       city,
       deliveryAddress,
+      itemsSummary,
+      totalFcfa,
       productId,
       quantity,
       customerNote
@@ -116,12 +154,12 @@ app.post('/api/order', (req, res) => {
 
     const order = addEcommerceOrder({
       customerName,
+      customerType,
       customerEmail,
-      customerPhone,
-      city,
-      deliveryAddress,
-      productId,
-      quantity,
+      phone: phone || customerPhone,
+      deliveryZone: deliveryZone || city || deliveryAddress,
+      itemsSummary: itemsSummary || `${quantity || 1} × ${productId || 'Produit Poivre SCPPE'}`,
+      totalFcfa: Number(totalFcfa || 15000),
       customerNote
     });
 
@@ -139,29 +177,45 @@ app.post('/api/b2b-loi', (req, res) => {
   try {
     const {
       companyName,
+      contactName,
       contactPerson,
       email,
       phone,
+      businessType,
       sector,
       cityCountry,
+      countryCity,
+      productSummary,
       productInterest,
+      frequency,
       monthlyVolumeKg,
+      contractDurationMonths,
       desiredPricePerKgFcfa,
+      annualEstimatedValueFcfa,
       packagingPreference,
       deliveryTerms,
       notes
     } = req.body;
 
+    const volKg = Number(monthlyVolumeKg || 25);
+    const months = Number(contractDurationMonths || 12);
+    const estimatedAnnual =
+      annualEstimatedValueFcfa !== undefined
+        ? Number(annualEstimatedValueFcfa)
+        : volKg * Number(desiredPricePerKgFcfa || 12000) * 12;
+
     const contract = addB2bContractLoi({
       companyName,
-      contactPerson,
+      contactName: contactName || contactPerson,
       email,
       phone,
-      sector,
-      cityCountry,
-      productInterest,
-      monthlyVolumeKg,
-      desiredPricePerKgFcfa,
+      businessType: businessType || sector,
+      countryCity: countryCity || cityCountry,
+      productSummary: productSummary || productInterest,
+      frequency,
+      monthlyVolumeKg: volKg,
+      contractDurationMonths: months,
+      annualEstimatedValueFcfa: estimatedAnnual,
       packagingPreference,
       deliveryTerms,
       notes
@@ -307,11 +361,11 @@ app.get('/api/summary', (_req, res) => {
 
 function startServer(port) {
   const server = app.listen(port, () => {
-    console.log(`🌿 [Écosystème Unifié 4-en-1 Poivre Soppi] en ligne sur http://localhost:${port}`);
+    console.log(`🌿 [Écosystème Unifié 4-en-1 Coopérative SCPPE] en ligne sur http://localhost:${port}`);
     console.log(`   ├─ 🌐 Hub Global : http://localhost:${port}/`);
-    console.log(`   ├─ 🚀 Financement & Précommandes (50M) : http://localhost:${port}/invest`);
+    console.log(`   ├─ 🚀 Financement & Précommandes (60M) : http://localhost:${port}/invest`);
     console.log(`   ├─ 🛒 Boutique & Contrats B2B : http://localhost:${port}/boutique`);
-    console.log(`   └─ 🏭 Portail SaaS Coopérative : http://localhost:${port}/saas`);
+    console.log(`   └─ 🏭 Portail Coopérative Agricole : http://localhost:${port}/saas`);
   });
 
   server.on('error', (err) => {

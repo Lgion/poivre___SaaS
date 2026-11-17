@@ -8,18 +8,19 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "node start-ecosystem.js",
+    "dev_": "node start-ecosystem.js",
     "dev:unified": "node apps/unified/server.js",
+    "dev": "npm run dev:unified",
     "dev:crowdfunding": "node apps/crowdfunding/server.js",
     "dev:ecommerce": "node apps/ecommerce/server.js",
     "dev:saas": "node apps/saas/server.js",
     "seed": "node --experimental-sqlite packages/database/seed.js"
   },
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "leaflet": "^1.9.4"
   },
   "main": "ecosystem.config.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"

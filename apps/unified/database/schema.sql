@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS campaign (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
-  target_amount_fcfa INTEGER NOT NULL DEFAULT 50000000,
+  target_amount_fcfa INTEGER NOT NULL DEFAULT 60000000,
   initial_committed_fcfa INTEGER NOT NULL DEFAULT 14850000,
   cooperative_name TEXT NOT NULL,
   certification_ggn TEXT NOT NULL,
